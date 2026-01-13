@@ -1,14 +1,19 @@
-package com.pomdetom.notes.test.model.entity;
+package com.pomdetom.notes.model.entity;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 /**
- * 笔记实体类
+ * 评论实体类
  */
 @Data
-public class Note {
+public class Comment {
+    /**
+     * 评论ID
+     */
+    private Integer commentId;
+
     /**
      * 笔记ID
      */
@@ -20,12 +25,12 @@ public class Note {
     private Long authorId;
 
     /**
-     * 问题ID
+     * 父评论ID
      */
-    private Integer questionId;
+    private Integer parentId;
 
     /**
-     * 笔记内容
+     * 评论内容
      */
     private String content;
 
@@ -35,14 +40,9 @@ public class Note {
     private Integer likeCount;
 
     /**
-     * 评论数
+     * 回复数
      */
-    private Integer commentCount;
-
-    /**
-     * 收藏数
-     */
-    private Integer collectCount;
+    private Integer replyCount;
 
     /**
      * 创建时间

@@ -69,6 +69,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.pomdetom</groupId>
             <artifactId>notes-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>

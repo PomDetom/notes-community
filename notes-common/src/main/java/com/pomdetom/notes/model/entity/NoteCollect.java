@@ -1,23 +1,23 @@
-package com.pomdetom.notes.test.model.entity;
+package com.pomdetom.notes.model.entity;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 /**
- * 评论点赞实体类
+ * 笔记收藏实体类
  */
 @Data
-public class CommentLike {
+public class NoteCollect {
     /**
-     * 评论点赞ID
+     * 收藏ID
      */
-    private Integer commentLikeId;
+    private Integer collectId;
 
     /**
-     * 评论ID
+     * 笔记ID
      */
-    private Integer commentId;
+    private Integer noteId;
 
     /**
      * 用户ID

@@ -14,6 +14,7 @@ public class Task implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        testService.testRegister();
         String result = testService.sayHello("world");
         System.out.println("Receive result ======> " + result);
 

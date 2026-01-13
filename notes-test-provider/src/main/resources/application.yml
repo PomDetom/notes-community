@@ -25,3 +25,12 @@
 #    register-mode: instance
 #    parameters:
 #      namespace: 3aeb0b4e-650a-4024-8c27-cb56242d0bd1
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#seata:
+#  client:
+#    undo:
+#      log-serialization: jackson
