@@ -1,0 +1,12 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: notes-test-provider
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: ${nacos.address:127.0.0.1}:8848
+        file-extension: yml

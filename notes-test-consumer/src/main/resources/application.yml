@@ -1,0 +1,7 @@
+dubbo:
+  application:
+    name: notes-test-consumer
+    logger: slf4j
+    qos-enable: false
+  registry:
+    address: nacos://${nacos.address:127.0.0.1}:8848?username=nacos&password=nacos

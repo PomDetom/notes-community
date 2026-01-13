@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.address:127.0.0.1}:8848
+    sentinel:
+      transport:
+        dashboard: ${sentinel.address:127.0.0.1}:8080
+dubbo:
+  application:
+    name: notes-test-provider
+    logger:
+      slf4j
+  protocol:
+    name: tri
+    port: -1
+  registry:
+    address: nacos://${nacos.address:127.0.0.1}:8848?username=nacos&password=nacos
+    register-mode: instance
