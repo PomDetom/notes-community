@@ -5,3 +5,5 @@ dubbo:
     qos-enable: false
   registry:
     address: nacos://${nacos.address:127.0.0.1}:8848?username=nacos&password=nacos
+    parameters:
+      namespace: 3aeb0b4e-650a-4024-8c27-cb56242d0bd1

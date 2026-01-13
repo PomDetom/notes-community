@@ -1,19 +1,27 @@
-spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${nacos.address:127.0.0.1}:8848
-    sentinel:
-      transport:
-        dashboard: ${sentinel.address:127.0.0.1}:8080
-dubbo:
-  application:
-    name: notes-test-provider
-    logger:
-      slf4j
-  protocol:
-    name: tri
-    port: -1
-  registry:
-    address: nacos://${nacos.address:127.0.0.1}:8848?username=nacos&password=nacos
-    register-mode: instance
+#nacos配置
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/kamanote_tech?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: root
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ${nacos.address:127.0.0.1}:8848
+#    sentinel:
+#      transport:
+#        dashboard: ${sentinel.address:127.0.0.1}:8080
+#dubbo:
+#  application:
+#    name: notes-test-provider
+#    logger:
+#      slf4j
+#  protocol:
+#    name: tri
+#    port: -1
+#  registry:
+#    address: nacos://${nacos.address:127.0.0.1}:8848?username=nacos&password=nacos
+#    register-mode: instance
+#    parameters:
+#      namespace: 3aeb0b4e-650a-4024-8c27-cb56242d0bd1
