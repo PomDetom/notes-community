@@ -50,7 +50,7 @@
 
         <dependency>
             <groupId>com.pomdetom</groupId>
-            <artifactId>notes-common</artifactId>
+            <artifactId>notes-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
