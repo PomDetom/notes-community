@@ -13,6 +13,15 @@
         <module>notes-common</module>
         <module>notes-test-provider</module>
         <module>notes-api</module>
+        <module>notes-gateway</module>
+        <module>notes-auth</module>
+        <module>notes-note</module>
+        <module>notes-community</module>
+        <module>notes-search</module>
+        <module>notes-user</module>
+        <module>notes-job</module>
+        <module>notes-file</module>
+        <module>notes-question</module>
     </modules>
     <properties>
         <java.version>17</java.version>
