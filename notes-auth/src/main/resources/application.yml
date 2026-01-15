@@ -1,0 +1,29 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: notes-auth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+      eager: true
+
+dubbo:
+  application:
+    name: notes-auth
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://localhost:8848
+  consumer:
+    check: false # Don't check if provider exists on startup
+
+jwt:
+  secret: abc123
+  expiration: 2592000

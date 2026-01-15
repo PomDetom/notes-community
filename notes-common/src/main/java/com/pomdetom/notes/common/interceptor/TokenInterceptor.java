@@ -2,16 +2,13 @@ package com.pomdetom.notes.common.interceptor;
 
 import com.pomdetom.notes.common.scope.RequestScopeData;
 import com.pomdetom.notes.common.utils.JwtUtil;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component
-public class TokenInterceptor implements HandlerInterceptor
-{
+public class TokenInterceptor implements HandlerInterceptor {
     @Resource
     private RequestScopeData requestScopeData;
 
@@ -19,7 +16,8 @@ public class TokenInterceptor implements HandlerInterceptor
     private JwtUtil jwtUtil;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
 
         // 对于每个请求进行拦截，获取请求头中的 token
         // 然后对 token 进行处理，并将 token 携带的信息存储到，在请求周期中全局存在的 requestScopeData 中

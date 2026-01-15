@@ -14,7 +14,7 @@ jwt:
 #        server-addr: ${nacos.address:127.0.0.1}:8848
 #    sentinel:
 #      transport:
-#        dashboard: ${sentinel.address:127.0.0.1}:8080
+#        dashboard: ${sentinel.address:127.0.0.1}:8858
 #dubbo:
 #  application:
 #    name: notes-test-provider

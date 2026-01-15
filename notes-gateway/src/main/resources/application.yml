@@ -1,0 +1,44 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: notes-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true # Enable initialized routing by serviceId
+      routes:
+        - id: notes-test-provider
+          uri: lb://notes-test-provider
+          predicates:
+            - Path=/test/**
+        - id: notes-auth
+          uri: lb://notes-auth
+          predicates:
+            - Path=/api/auth/**
+        - id: notes-user
+          uri: lb://notes-user
+          predicates:
+            - Path=/api/user/**
+        - id: notes-note
+          uri: lb://notes-note
+          predicates:
+            - Path=/api/note/**
+    sentinel:
+      transport:
+        dashboard: localhost:8858 # Sentinel Dashboard address
+      eager: true # connection immediately
+      filter:
+        enabled: true
+jwt:
+  secret: abc123
+  expiration: 2592000
+  whitelist:
+    - /api/auth/login
+    - /api/auth/register
+    - /api/auth/hello
