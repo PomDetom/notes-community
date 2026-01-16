@@ -1,0 +1,42 @@
+# 自定义邮件配置
+mail:
+  verify-code:
+    expire-minutes: 15  # 验证码过期时间 15 min
+    limit-expire-seconds: 60  # 发送过一次验证码后，在 60s 内不能再发送验证码，用于限流
+    template-path: "templates/mail/verify-code.html"
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8858
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 2000
+    jedis:
+      pool:
+        enabled: on
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: 2000
+    password: 123456
+
+dubbo:
+  application:
+    name: notes-email
+    qos-enable: false
+    logger: slf4j
+  protocol:
+    name: tri
+    port: -1
+  registry:
+    address: nacos://127.0.0.1:8848?username=nacos&password=nacos
+    register-mode: instance
+    parameters:
+      namespace: 3aeb0b4e-650a-4024-8c27-cb56242d0bd1

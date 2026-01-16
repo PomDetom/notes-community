@@ -27,7 +27,7 @@
         <dependency>
             <groupId>com.pomdetom</groupId>
             <artifactId>notes-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

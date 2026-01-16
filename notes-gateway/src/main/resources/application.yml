@@ -24,11 +24,22 @@ spring:
         - id: notes-user
           uri: lb://notes-user
           predicates:
-            - Path=/api/user/**
+            - Path=/api/users/**
         - id: notes-note
           uri: lb://notes-note
           predicates:
             - Path=/api/note/**
+        - id: notes-email
+          uri: lb://notes-email
+          predicates:
+            - Path=/api/email
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
     sentinel:
       transport:
         dashboard: localhost:8858 # Sentinel Dashboard address
@@ -39,6 +50,6 @@ jwt:
   secret: abc123
   expiration: 2592000
   whitelist:
-    - /api/auth/login
-    - /api/auth/register
+    - /api/users/login
+    - /api/users/register
     - /api/auth/hello

@@ -1,0 +1,13 @@
+server:
+  port: 8008
+spring:
+  application:
+    name: notes-file
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: ${nacos.address:127.0.0.1}:8848
+        file-extension: yml
+        group: SERVICE-GROUP

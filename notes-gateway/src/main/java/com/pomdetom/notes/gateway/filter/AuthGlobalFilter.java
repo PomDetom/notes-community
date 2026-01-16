@@ -49,9 +49,14 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         }
 
         token = token.substring(7);
-        if (!jwtUtil.validateToken(token)) {
+        try {
+            jwtUtil.validateTokenThrows(token);
+        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+            log.info("token已过期");
+            return unauthorized(exchange, "Token expired");
+        } catch (Exception e) {
             log.info("token无效");
-            return unauthorized(exchange);
+            return unauthorized(exchange, "Token invalid");
         }
 
         // uid
@@ -61,17 +66,24 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             return unauthorized(exchange);
         }
 
-        ServerHttpRequest mutatedRequest = request.mutate()
-                .header("User-Id", String.valueOf(userId))
-                .build();
+        log.info("存在token，放行");
+        return chain.filter(exchange);
+    }
 
-        return chain.filter(exchange.mutate().request(mutatedRequest).build());
+    private Mono<Void> unauthorized(ServerWebExchange exchange, String message) {
+        ServerHttpResponse response = exchange.getResponse();
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
+        response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
+
+        String jsonMatch = "{\"code\": 401, \"message\": \"" + message + "\", \"data\": null}";
+        org.springframework.core.io.buffer.DataBuffer buffer = response.bufferFactory()
+                .wrap(jsonMatch.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+
+        return response.writeWith(Mono.just(buffer));
     }
 
     private Mono<Void> unauthorized(ServerWebExchange exchange) {
-        ServerHttpResponse response = exchange.getResponse();
-        response.setStatusCode(HttpStatus.UNAUTHORIZED);
-        return response.setComplete();
+        return unauthorized(exchange, "Unauthorized");
     }
 
     @Override

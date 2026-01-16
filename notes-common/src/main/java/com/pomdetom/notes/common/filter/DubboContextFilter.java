@@ -20,24 +20,28 @@ public class DubboContextFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        RpcContext rpcContext = RpcContext.getContext();
-
-        // Consumer Side: Write Context -> RPC Attachment
+        // Consumer Side
         if (RpcContext.getContext().isConsumerSide()) {
             Long userId = UserContext.getUserId();
-            if (userId != null) {
-                rpcContext.setAttachment(USER_ID_KEY, String.valueOf(userId));
-            }
             String token = UserContext.getToken();
+            log.info("Dubbo Consumer: Preparing to invoke. UserId: {}, Token: {}", userId, token);
+
+            if (userId != null) {
+                // Dubbo 3 recommended way for passing attachments to provider
+                RpcContext.getClientAttachment().setAttachment(USER_ID_KEY, String.valueOf(userId));
+            }
             if (token != null) {
-                rpcContext.setAttachment(TOKEN_KEY, token);
+                RpcContext.getClientAttachment().setAttachment(TOKEN_KEY, token);
             }
         }
 
-        // Provider Side: Read RPC Attachment -> Context
+        // Provider Side
         if (RpcContext.getContext().isProviderSide()) {
-            String userIdStr = rpcContext.getAttachment(USER_ID_KEY);
-            String token = rpcContext.getAttachment(TOKEN_KEY);
+            // Dubbo 3 recommended way for reading attachments from consumer
+            String userIdStr = RpcContext.getServerAttachment().getAttachment(USER_ID_KEY);
+            String token = RpcContext.getServerAttachment().getAttachment(TOKEN_KEY);
+
+            log.info("Dubbo Provider: Received invocation. UserId: {}, Token: {}", userIdStr, token);
 
             if (userIdStr != null) {
                 try {
@@ -56,6 +60,7 @@ public class DubboContextFilter implements Filter {
         } finally {
             // Provider Side: Clean up Context
             if (RpcContext.getContext().isProviderSide()) {
+                log.info("Dubbo Provider: Clearing UserContext.");
                 UserContext.clear();
             }
         }

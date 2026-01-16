@@ -2,12 +2,14 @@ package com.pomdetom.notes.common.interceptor;
 
 import com.pomdetom.notes.common.context.UserContext;
 import com.pomdetom.notes.common.utils.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 public class TokenInterceptor implements HandlerInterceptor {
 
     @Resource
@@ -18,6 +20,9 @@ public class TokenInterceptor implements HandlerInterceptor {
             throws Exception {
 
         String token = request.getHeader("Authorization");
+        String url = request.getRequestURI();
+
+        log.info("TokenInterceptor - Request: {}, Token present: {}", url, token != null);
 
         if (token == null) {
             return true;
@@ -29,6 +34,9 @@ public class TokenInterceptor implements HandlerInterceptor {
             Long userId = jwtUtil.getUserIdFromToken(token);
             UserContext.setUserId(userId);
             UserContext.setToken(token);
+            log.info("TokenInterceptor - Token validated. UserID: {}", userId);
+        } else {
+            log.warn("TokenInterceptor - Token validation failed.");
         }
         // Token 无效则不设置 Context，视为未登录
         return true;

@@ -49,15 +49,26 @@ public class JwtUtil {
     }
 
     /**
-     * 验证token是否有效
+     * 验证token是否有效 (返回布尔值，兼容旧代码)
      */
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            validateTokenThrows(token);
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    /**
+     * 验证token是否有效 (抛出具体异常)
+     * 
+     * @throws io.jsonwebtoken.ExpiredJwtException   Token过期
+     * @throws io.jsonwebtoken.SignatureException    签名无效
+     * @throws io.jsonwebtoken.MalformedJwtException Token格式错误
+     */
+    public void validateTokenThrows(String token) {
+        Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
     }
 
     /**

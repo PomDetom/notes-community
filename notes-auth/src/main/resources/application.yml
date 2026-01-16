@@ -1,6 +1,10 @@
 server:
   port: 8002
 
+jwt:
+  secret: abc123
+  expiration: 2592000
+
 spring:
   application:
     name: notes-auth
@@ -26,7 +30,3 @@ dubbo:
     register-mode: instance
     parameters:
       namespace: 3aeb0b4e-650a-4024-8c27-cb56242d0bd1
-
-jwt:
-  secret: abc123
-  expiration: 2592000
