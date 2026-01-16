@@ -16,19 +16,19 @@ public class Task implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // 测试seata
         // testService.testRegister();
-        String result = testService.sayHello("world");
-        System.out.println("Receive result ======> " + result);
+//        String result = testService.sayHello("world");
+//        System.out.println("Receive result ======> " + result);
 
-        new Thread(()-> {
-            while (true) {
-                try {
-                    Thread.sleep(1000);
-                    System.out.println(new Date() + " Receive result ======> " + testService.sayHello("world"));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Thread.currentThread().interrupt();
-                }
-            }
-        }).start();
+//        new Thread(()-> {
+//            while (true) {
+//                try {
+//                    Thread.sleep(1000);
+//                    System.out.println(new Date() + " Receive result ======> " + testService.sayHello("world"));
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                    Thread.currentThread().interrupt();
+//                }
+//            }
+//        }).start();
     }
 }

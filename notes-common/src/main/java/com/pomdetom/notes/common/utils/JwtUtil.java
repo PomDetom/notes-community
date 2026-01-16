@@ -4,13 +4,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
 public class JwtUtil {
 
     @Value("${jwt.secret}")
@@ -25,7 +23,7 @@ public class JwtUtil {
     public String generateToken(Long userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", userId);
-        
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date())
@@ -43,7 +41,7 @@ public class JwtUtil {
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
-            
+
             return Long.valueOf(claims.get("userId").toString());
         } catch (Exception e) {
             return null;
@@ -68,4 +66,4 @@ public class JwtUtil {
     public String refreshToken(Long userId) {
         return generateToken(userId);
     }
-} 
+}

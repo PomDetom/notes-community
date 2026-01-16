@@ -16,18 +16,16 @@ public class ParamExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ApiResponse<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-                errors.put(error.getField(), error.getDefaultMessage())
-        );
+        ex.getBindingResult().getFieldErrors()
+                .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
         return ApiResponse.error(HttpStatus.BAD_REQUEST.value(), "Validation Failed", errors);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ApiResponse<Map<String, String>> handleConstraintViolationExceptions(ConstraintViolationException ex) {
         Map<String, String> errors = new HashMap<>();
-        ex.getConstraintViolations().forEach(violation ->
-                errors.put(violation.getPropertyPath().toString(), violation.getMessage())
-        );
+        ex.getConstraintViolations()
+                .forEach(violation -> errors.put(violation.getPropertyPath().toString(), violation.getMessage()));
         return ApiResponse.error(HttpStatus.BAD_REQUEST.value(), "Validation Failed", errors);
     }
 

@@ -1,7 +1,10 @@
 package com.pomdetom.notes.api.test;
 
-public interface TestService {
-    String sayHello(String name);
+import com.pomdetom.notes.common.model.base.ApiResponse;
+import com.pomdetom.notes.common.model.entity.User;
 
-    void testRegister();
+public interface TestService {
+    ApiResponse<String> sayHello(String name);
+
+    ApiResponse<User> testRegister();
 }

@@ -19,8 +19,13 @@ public class TestController {
     private TestService testService;
 
     @GetMapping("/hello")
-    public String testSayHello() {
+    public ApiResponse<String> testSayHello() {
         return testService.sayHello("world");
+    }
+
+    @GetMapping("/register")
+    public ApiResponse<User> register() {
+        return testService.testRegister();
     }
 
 }

@@ -44,12 +44,13 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         // Token
         String token = request.getHeaders().getFirst("Authorization");
         if (token == null || !token.startsWith("Bearer ")) {
-            log.info("Authorization未携带token");
-            return unauthorized(exchange);
+            log.info("Authorization未携带token，放行由下游服务处理");
+            return chain.filter(exchange);
         }
 
         token = token.substring(7);
         if (!jwtUtil.validateToken(token)) {
+            log.info("token无效");
             return unauthorized(exchange);
         }
 

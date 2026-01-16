@@ -1,7 +1,8 @@
-jwt:
-  secret: abc123
-  expiration: 2592000
-#nacos配置
+# nacos配置
+#jwt:
+#  secret: abc123
+#  expiration: 2592000
+#
 #spring:
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,20 +12,21 @@ jwt:
 #  cloud:
 #    nacos:
 #      discovery:
-#        server-addr: ${nacos.address:127.0.0.1}:8848
+#        server-addr: 127.0.0.1:8848
 #    sentinel:
 #      transport:
-#        dashboard: ${sentinel.address:127.0.0.1}:8858
+#        dashboard: 127.0.0.1:8858
+#
 #dubbo:
 #  application:
 #    name: notes-test-provider
-#    logger:
-#      slf4j
+#    qos-enable: false
+#    logger: slf4j
 #  protocol:
 #    name: tri
 #    port: -1
 #  registry:
-#    address: nacos://${nacos.address:127.0.0.1}:8848?username=nacos&password=nacos
+#    address: nacos://127.0.0.1:8848?username=nacos&password=nacos
 #    register-mode: instance
 #    parameters:
 #      namespace: 3aeb0b4e-650a-4024-8c27-cb56242d0bd1

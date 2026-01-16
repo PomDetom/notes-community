@@ -1,6 +1,6 @@
 package com.pomdetom.notes.common.interceptor;
 
-import com.pomdetom.notes.common.scope.RequestScopeData;
+import com.pomdetom.notes.common.context.UserContext;
 import com.pomdetom.notes.common.utils.JwtUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class TokenInterceptor implements HandlerInterceptor {
-    @Resource
-    private RequestScopeData requestScopeData;
 
     @Resource
     private JwtUtil jwtUtil;
@@ -19,15 +17,9 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-        // 对于每个请求进行拦截，获取请求头中的 token
-        // 然后对 token 进行处理，并将 token 携带的信息存储到，在请求周期中全局存在的 requestScopeData 中
-
         String token = request.getHeader("Authorization");
 
         if (token == null) {
-            requestScopeData.setLogin(false);
-            requestScopeData.setToken(null);
-            requestScopeData.setUserId(null);
             return true;
         }
 
@@ -35,12 +27,16 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         if (jwtUtil.validateToken(token)) {
             Long userId = jwtUtil.getUserIdFromToken(token);
-            requestScopeData.setUserId(userId);
-            requestScopeData.setToken(token);
-            requestScopeData.setLogin(true);
-        } else {
-            requestScopeData.setLogin(false);
+            UserContext.setUserId(userId);
+            UserContext.setToken(token);
         }
-        return HandlerInterceptor.super.preHandle(request, response, handler);
+        // Token 无效则不设置 Context，视为未登录
+        return true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+        UserContext.clear();
     }
 }

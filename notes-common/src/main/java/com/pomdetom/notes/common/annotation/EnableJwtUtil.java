@@ -1,6 +1,5 @@
 package com.pomdetom.notes.common.annotation;
 
-import com.pomdetom.notes.common.aspect.NeedLoginAspect;
 import com.pomdetom.notes.common.utils.JwtUtil;
 import org.springframework.context.annotation.Import;
 
@@ -9,6 +8,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({JwtUtil.class, NeedLoginAspect.class})
-public @interface EnableNeedLoginAspect {
+@Import(JwtUtil.class)
+public @interface EnableJwtUtil {
 }

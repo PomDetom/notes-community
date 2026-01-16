@@ -1,6 +1,8 @@
 package com.pomdetom.notes.service.provider;
 
 import com.pomdetom.notes.api.test.TestService;
+import com.pomdetom.notes.common.annotation.NeedLogin;
+import com.pomdetom.notes.common.model.base.ApiResponse;
 import com.pomdetom.notes.service.mapper.TestServiceMapper;
 import com.pomdetom.notes.common.model.entity.User;
 import io.seata.spring.annotation.GlobalTransactional;
@@ -18,14 +20,15 @@ public class TestServiceImpl implements TestService {
     private TestServiceMapper testServiceMapper;
 
     @Override
-    public String sayHello(String name) {
+    public ApiResponse<String> sayHello(String name) {
         User user = testServiceMapper.getUser();
-        return "Hello " + name + " " + user;
+        return ApiResponse.success("Hello " + name + " " + user);
     }
 
-    @GlobalTransactional
+    @NeedLogin
+//    @GlobalTransactional
     @Override
-    public void testRegister() {
+    public ApiResponse<User> testRegister() {
         User user = new User();
         user.setAccount("test123456");
         user.setPassword("test123456");
@@ -34,7 +37,8 @@ public class TestServiceImpl implements TestService {
         user.setIsAdmin(0);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
-        testServiceMapper.insert(user);
-        throw new RuntimeException("测试触发 seata 全局回滚");
+//        testServiceMapper.insert(user);
+//        throw new RuntimeException("测试触发 seata 全局回滚");
+        return ApiResponse.success(user);
     }
 }

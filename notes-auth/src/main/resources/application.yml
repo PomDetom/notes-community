@@ -16,13 +16,16 @@ spring:
 dubbo:
   application:
     name: notes-auth
+    qos-enable: false
+    logger: slf4j
   protocol:
-    name: dubbo
+    name: tri
     port: -1
   registry:
-    address: nacos://localhost:8848
-  consumer:
-    check: false # Don't check if provider exists on startup
+    address: nacos://${nacos.address:127.0.0.1}:8848?username=nacos&password=nacos
+    register-mode: instance
+    parameters:
+      namespace: 3aeb0b4e-650a-4024-8c27-cb56242d0bd1
 
 jwt:
   secret: abc123
