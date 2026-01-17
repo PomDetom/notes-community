@@ -21,7 +21,7 @@ spring:
         - id: notes-community
           uri: lb://notes-community
           predicates:
-            - Path=/api/messages/**
+            - Path=/api/messages/**, /api/comments/**
         # 邮箱模块
         - id: notes-email
           uri: lb://notes-email
@@ -41,7 +41,7 @@ spring:
         - id: notes-note
           uri: lb://notes-note
           predicates:
-            - Path=/api/notes/**, /api/like/note/**, /api/collections/**
+            - Path=/api/notes/**, /api/like/note/**, /api/collections/**, /api/categories/**, /api/admin/categories/**
         # 问题模块
         - id: notes-question
           uri: lb://notes-question

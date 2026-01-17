@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @EnableDubbo
 @EnableNeedLoginAspect
 @EnableNotesWeb
-public class MessageApplication {
+public class CommunityApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MessageApplication.class, args);
+        SpringApplication.run(CommunityApplication.class, args);
     }
 }

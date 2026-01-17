@@ -29,8 +29,8 @@ import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
  * 评论服务实现类
  */
 @Slf4j
-@Service
+@DubboService
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
 
