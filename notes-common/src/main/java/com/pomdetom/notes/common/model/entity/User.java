@@ -8,6 +8,8 @@ import lombok.ToString;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import java.io.Serializable;
+
 /**
  * 用户实体类
  */
@@ -15,7 +17,8 @@ import java.time.LocalDateTime;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 用户ID（主键）
      * 系统分配不可修改

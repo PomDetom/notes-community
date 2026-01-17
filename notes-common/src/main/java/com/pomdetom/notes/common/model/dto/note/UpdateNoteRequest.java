@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.dto.note;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -9,7 +11,8 @@ import javax.validation.constraints.NotNull;
  * 更新笔记请求DTO
  */
 @Data
-public class UpdateNoteRequest {
+public class UpdateNoteRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
     /*
      * 笔记内容
      */

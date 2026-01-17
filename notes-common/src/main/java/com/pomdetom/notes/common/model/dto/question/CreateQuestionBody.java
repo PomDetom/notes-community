@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.dto.question;
 
+import java.io.Serializable;
+
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -9,7 +11,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class CreateQuestionBody {
+public class CreateQuestionBody implements Serializable {
+    private static final long serialVersionUID = 1L;
     @NotNull(message = "categoryId 不能为空")
     @Min(value = 1, message = "categoryId 必须为正整数")
     private Integer categoryId;

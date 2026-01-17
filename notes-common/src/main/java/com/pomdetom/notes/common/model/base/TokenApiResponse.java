@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.base;
 
+import java.io.Serializable;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,7 +13,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class TokenApiResponse<T> extends ApiResponse<T> {
+public class TokenApiResponse<T> extends ApiResponse<T>  implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * -- GETTER --
      *  获取Token的方法

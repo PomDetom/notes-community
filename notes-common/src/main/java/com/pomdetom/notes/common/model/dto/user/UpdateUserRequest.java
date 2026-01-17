@@ -5,11 +5,14 @@ import lombok.Data;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
+import java.io.Serializable;
+
 /**
  * 用户信息更新请求 DTO
  */
 @Data
-public class UpdateUserRequest {
+public class UpdateUserRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 用户昵称
      * 非必填，长度在 1-16 个字符，允许中文、字母、数字、下划线。

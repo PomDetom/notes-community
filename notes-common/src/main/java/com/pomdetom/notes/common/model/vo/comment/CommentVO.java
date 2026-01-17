@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.vo.comment;
 
+import java.io.Serializable;
+
 import com.pomdetom.notes.common.model.vo.user.UserActionVO;
 import lombok.Data;
 
@@ -10,7 +12,8 @@ import java.util.List;
  * 评论视图对象
  */
 @Data
-public class CommentVO {
+public class CommentVO implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 评论ID
      */

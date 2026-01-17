@@ -7,8 +7,11 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import java.io.Serializable;
+
 @Data
-public class UserQueryParam {
+public class UserQueryParam implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Min(value = 1, message = "userId 必须为正整数")
     private Long userId;
 

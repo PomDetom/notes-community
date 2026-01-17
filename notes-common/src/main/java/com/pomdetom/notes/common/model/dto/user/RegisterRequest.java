@@ -7,11 +7,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import java.io.Serializable;
+
 /**
  * 用户注册请求DTO
  */
 @Data
-public class RegisterRequest {
+public class RegisterRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户账号

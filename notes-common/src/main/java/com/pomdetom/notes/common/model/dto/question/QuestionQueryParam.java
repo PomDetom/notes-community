@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.dto.question;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import javax.validation.constraints.Max;
@@ -8,7 +10,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class QuestionQueryParam {
+public class QuestionQueryParam implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Min(value = 1, message = "categoryId 必须为正整数")
     private Integer categoryId;

@@ -1,10 +1,13 @@
 package com.pomdetom.notes.common.model.vo.question;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 // 用于普通用户查询携带个人信息的问题 VO
 @Data
-public class QuestionUserVO {
+public class QuestionUserVO implements Serializable {
+    private static final long serialVersionUID = 1L;
     /*
      * 问题ID（主键）
      */

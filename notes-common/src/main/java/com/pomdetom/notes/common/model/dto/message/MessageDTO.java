@@ -1,10 +1,13 @@
 package com.pomdetom.notes.common.model.dto.message;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 
 @Data
-public class MessageDTO {
+public class MessageDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 消息ID
      */

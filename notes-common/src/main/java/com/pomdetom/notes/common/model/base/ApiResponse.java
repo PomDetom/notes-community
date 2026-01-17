@@ -3,6 +3,8 @@ package com.pomdetom.notes.common.model.base;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * API响应类
  *
@@ -10,7 +12,8 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class ApiResponse<T> {
+public class ApiResponse<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 响应码
      */
@@ -29,9 +32,9 @@ public class ApiResponse<T> {
     /**
      * 构造函数
      *
-     * @param code 响应码
+     * @param code    响应码
      * @param message 响应消息
-     * @param data 响应数据
+     * @param data    响应数据
      */
     public ApiResponse(int code, String message, T data) {
         this.code = code;
@@ -43,7 +46,7 @@ public class ApiResponse<T> {
      * 创建成功响应
      *
      * @param data 响应数据
-     * @param <T> 响应数据类型
+     * @param <T>  响应数据类型
      * @return API响应
      */
     public static <T> ApiResponse<T> success(T data) {
@@ -66,7 +69,7 @@ public class ApiResponse<T> {
     /**
      * 创建错误响应
      *
-     * @param code 错误码
+     * @param code    错误码
      * @param message 错误消息
      * @return API响应
      */
@@ -80,9 +83,9 @@ public class ApiResponse<T> {
     /**
      * 创建带数据的错误响应
      *
-     * @param code 错误码
+     * @param code    错误码
      * @param message 错误消息
-     * @param data 错误数据
+     * @param data    错误数据
      * @return API响应
      */
     public static <T> ApiResponse<T> error(int code, String message, T data) {

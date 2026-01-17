@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.vo.message;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -8,7 +10,8 @@ import java.time.LocalDateTime;
  * 消息视图对象
  */
 @Data
-public class MessageVO {
+public class MessageVO implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 消息ID
      */

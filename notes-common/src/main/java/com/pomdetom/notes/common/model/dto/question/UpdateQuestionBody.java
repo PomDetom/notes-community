@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.dto.question;
 
+import java.io.Serializable;
+
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -8,7 +10,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class UpdateQuestionBody {
+public class UpdateQuestionBody implements Serializable {
+    private static final long serialVersionUID = 1L;
     /*
      * 问题标题
      */

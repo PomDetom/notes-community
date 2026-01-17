@@ -1,9 +1,12 @@
 package com.pomdetom.notes.common.model.vo.collection;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class CollectionVO {
+public class CollectionVO implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer collectionId;
     private String name;
     private String description;

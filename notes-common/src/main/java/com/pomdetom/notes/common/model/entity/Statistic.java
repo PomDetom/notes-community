@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -8,7 +10,8 @@ import java.time.LocalDate;
  * 统计信息实体，包含登录、注册、笔记等统计数据
  */
 @Data
-public class Statistic {
+public class Statistic implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 主键 ID
      */

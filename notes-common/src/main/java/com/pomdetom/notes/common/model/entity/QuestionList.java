@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import java.util.Date;
@@ -8,7 +10,8 @@ import java.util.Date;
  * 题单实体类
  */
 @Data
-public class QuestionList {
+public class QuestionList implements Serializable {
+    private static final long serialVersionUID = 1L;
     /*
      * 题单ID（主键）
      */

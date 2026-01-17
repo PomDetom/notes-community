@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.enums.questionList;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 
 @Getter

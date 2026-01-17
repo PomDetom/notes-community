@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -8,7 +10,8 @@ import java.time.LocalDateTime;
  * 评论实体类
  */
 @Data
-public class Comment {
+public class Comment implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 评论ID
      */

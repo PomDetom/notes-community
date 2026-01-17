@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.dto.note;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import javax.validation.constraints.Max;
@@ -11,7 +13,8 @@ import javax.validation.constraints.Pattern;
  * 笔记查询参数DTO
  */
 @Data
-public class NoteQueryParams {
+public class NoteQueryParams implements Serializable {
+    private static final long serialVersionUID = 1L;
     /*
      * 问题ID
      * 必须是正整数

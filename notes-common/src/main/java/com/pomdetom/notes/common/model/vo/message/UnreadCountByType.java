@@ -1,12 +1,15 @@
 package com.pomdetom.notes.common.model.vo.message;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 /**
  * 各类型未读消息数量
  */
 @Data
-public class UnreadCountByType {
+public class UnreadCountByType implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 消息类型
      */

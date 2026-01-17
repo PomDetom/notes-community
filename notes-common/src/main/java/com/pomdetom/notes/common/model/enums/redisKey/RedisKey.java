@@ -1,11 +1,14 @@
 package com.pomdetom.notes.common.model.enums.redisKey;
 
+import java.io.Serializable;
+
 /**
  * Redis 键名管理类
  * 用于统一管理和生成 Redis 中使用的各种键名
  * 遵循 Redis 键名命名规范 : 使用冒号分隔的层级结构
  */
-public class RedisKey {
+public class RedisKey implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 生成注册验证码的 Redis 键名
      * 

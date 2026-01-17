@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.dto.message;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -9,7 +11,8 @@ import java.time.LocalDateTime;
  * 消息查询参数
  */
 @Data
-public class MessageQueryParams {
+public class MessageQueryParams implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 消息类型
      */

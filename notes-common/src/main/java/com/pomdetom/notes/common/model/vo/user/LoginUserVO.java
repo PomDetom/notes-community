@@ -4,12 +4,15 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+import java.io.Serializable;
+
 /**
  * LoginUserVO 是当前登录的用户，承载自己的信息的 VO
  * 而 UserVO 是当前登录的用户，获取的其他的用户的信息
  */
 @Data
-public class LoginUserVO {
+public class LoginUserVO implements Serializable {
+    private static final long serialVersionUID = 1L;
     /*
      * 用户ID
      */

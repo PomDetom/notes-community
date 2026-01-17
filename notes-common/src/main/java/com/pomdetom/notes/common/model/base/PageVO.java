@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.base;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import java.util.List;
@@ -10,7 +12,8 @@ import java.util.List;
  * @param <T> 数据类型
  */
 @Data
-public class PageVO<T> {
+public class PageVO<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 当前页码
      */

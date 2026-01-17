@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.dto.comment;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -9,7 +11,8 @@ import javax.validation.constraints.NotNull;
  * 创建评论请求
  */
 @Data
-public class CreateCommentRequest {
+public class CreateCommentRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 笔记ID
      */

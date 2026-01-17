@@ -1,12 +1,15 @@
 package com.pomdetom.notes.common.model.base;
 
+import java.io.Serializable;
+
 /**
  * PaginationApiResponse类用于处理分页的API响应
  * 它继承自ApiResponse类，并添加了分页信息的支持
  *
  * @param <T> 泛型参数，表示API响应中携带的数据类型
  */
-public class PaginationApiResponse<T> extends ApiResponse<T> {
+public class PaginationApiResponse<T> extends ApiResponse<T>  implements Serializable {
+    private static final long serialVersionUID = 1L;
     // 分页信息对象
     private final Pagination pagination;
 

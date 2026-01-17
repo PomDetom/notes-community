@@ -1,11 +1,14 @@
 package com.pomdetom.notes.common.model.dto.questionList;
 
+import java.io.Serializable;
+
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 @Data
-public class UpdateQuestionListBody {
+public class UpdateQuestionListBody implements Serializable {
+    private static final long serialVersionUID = 1L;
     /*
      * 题单名称
      */

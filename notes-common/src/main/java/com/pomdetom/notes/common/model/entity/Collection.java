@@ -1,5 +1,7 @@
 package com.pomdetom.notes.common.model.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import java.util.Date;
@@ -8,7 +10,8 @@ import java.util.Date;
  * 收藏夹实体类
  */
 @Data
-public class Collection {
+public class Collection implements Serializable {
+    private static final long serialVersionUID = 1L;
     /*
      * 收藏夹ID（主键）
      */

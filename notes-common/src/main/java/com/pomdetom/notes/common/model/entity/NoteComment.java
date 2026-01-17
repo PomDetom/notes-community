@@ -1,11 +1,14 @@
 package com.pomdetom.notes.common.model.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class NoteComment {
+public class NoteComment implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private Integer noteId;
     private Long userId;

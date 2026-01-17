@@ -45,7 +45,6 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -68,7 +67,6 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-all</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <dependency>
