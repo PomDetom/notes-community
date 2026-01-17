@@ -1,6 +1,10 @@
 server:
   port: 8000
 
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: TRACE
+
 spring:
   application:
     name: notes-gateway
@@ -13,26 +17,48 @@ spring:
         locator:
           enabled: true # Enable initialized routing by serviceId
       routes:
-        - id: notes-test-provider
-          uri: lb://notes-test-provider
+        # 社区模块
+        - id: notes-community
+          uri: lb://notes-community
           predicates:
-            - Path=/test/**
+            - Path=/api/messages/**
+        # 邮箱模块
+        - id: notes-email
+          uri: lb://notes-email
+          predicates:
+            - Path=/api/email/**
+        # 文件模块
+        - id: notes-file
+          uri: lb://notes-file
+          predicates:
+            - Path=/api/upload/**
+        # 认证模块
         - id: notes-auth
           uri: lb://notes-auth
           predicates:
             - Path=/api/auth/**
-        - id: notes-user
-          uri: lb://notes-user
-          predicates:
-            - Path=/api/users/**
+        # 笔记模块
         - id: notes-note
           uri: lb://notes-note
           predicates:
-            - Path=/api/note/**
-        - id: notes-email
-          uri: lb://notes-email
+            - Path=/api/notes/**, /api/like/note/**, /api/collections/**
+        # 问题模块
+        - id: notes-question
+          uri: lb://notes-question
           predicates:
-            - Path=/api/email
+            - Path=/api/questions/**, /api/admin/questions/**, /api/admin/questionlists/**, /api/questionlist-items/**, /api/admin/questionlist-items/**
+        # 搜索模块
+
+        # 测试模块
+        - id: notes-test-provider
+          uri: lb://notes-test-provider
+          predicates:
+            - Path=/test/**
+        # 用户模块
+        - id: notes-user
+          uri: lb://notes-user
+          predicates:
+            - Path=/api/users/**, /api/admin/users/**
       globalcors:
         cors-configurations:
           '[/**]':

@@ -7,20 +7,20 @@ import com.pomdetom.notes.common.email.EmailTask;
 import com.pomdetom.notes.common.utils.RandomCodeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @DubboService
 public class EmailServiceImpl implements EmailService {
 
-    @Autowired
+    @Resource
     private ObjectMapper objectMapper;
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, String> redisTemplate;
 
     @Value("${mail.verify-code.limit-expire-seconds}")

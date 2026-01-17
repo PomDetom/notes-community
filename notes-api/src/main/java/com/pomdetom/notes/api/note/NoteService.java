@@ -5,9 +5,11 @@ import com.pomdetom.notes.common.model.base.EmptyVO;
 import com.pomdetom.notes.common.model.dto.note.CreateNoteRequest;
 import com.pomdetom.notes.common.model.dto.note.NoteQueryParams;
 import com.pomdetom.notes.common.model.dto.note.UpdateNoteRequest;
+import com.pomdetom.notes.common.model.entity.Note;
 import com.pomdetom.notes.common.model.vo.note.*;
 
 import java.util.List;
+import java.util.Set;
 
 public interface NoteService {
     /**
@@ -66,4 +68,12 @@ public interface NoteService {
      * @return 用户提交top3Count
      */
     ApiResponse<Top3Count> submitNoteTop3Count();
+
+    Set<Integer> filterFinishedQuestionIdsByUser(Long userId, List<Integer> questionIds);
+
+    Note findByAuthorIdAndQuestionId(Long userId, Integer questionId);
+
+    Note findById(Integer targetId);
+
+    void incrementCommentCount(Integer noteId);
 }

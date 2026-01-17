@@ -93,4 +93,8 @@ public interface QuestionService {
      * @return 返回一个携带搜索结果的 ApiResponse 对象
      */
     ApiResponse<List<QuestionVO>> searchQuestions(SearchQuestionBody body);
+
+    List<Question> findByIdBatch(List<Integer> questionIds);
+
+    void deleteByCategoryIdBatch(List<Integer> categoryIds);
 }

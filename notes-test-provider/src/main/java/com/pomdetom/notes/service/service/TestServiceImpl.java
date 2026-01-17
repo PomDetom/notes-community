@@ -1,11 +1,10 @@
-package com.pomdetom.notes.service.provider;
+package com.pomdetom.notes.service.service;
 
 import com.pomdetom.notes.api.test.TestService;
 import com.pomdetom.notes.common.annotation.NeedLogin;
 import com.pomdetom.notes.common.model.base.ApiResponse;
 import com.pomdetom.notes.service.mapper.TestServiceMapper;
 import com.pomdetom.notes.common.model.entity.User;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 

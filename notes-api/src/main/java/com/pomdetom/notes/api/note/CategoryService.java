@@ -67,4 +67,6 @@ public interface CategoryService {
      * @return 返回一个Category对象，如果分类不存在则创建一个新分类
      */
     Category findOrCreateCategory(String categoryName, Integer parentCategoryId);
+
+    Category findById(Integer categoryId);
 }

@@ -1,4 +1,4 @@
-package com.pomdetom.notes.file;
+package com.pomdetom.notes.email;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableDubbo
-public class NotesFileApplication {
+public class EmailApplication {
     public static void main(String[] args) {
-        SpringApplication.run(NotesFileApplication.class, args);
+        SpringApplication.run(EmailApplication.class, args);
     }
 }

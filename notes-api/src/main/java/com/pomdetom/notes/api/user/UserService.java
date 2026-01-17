@@ -78,4 +78,6 @@ public interface UserService {
      * @return 包含上传成功头像的 URL 的响应对象
      */
     ApiResponse<AvatarVO> uploadAvatar(MultipartFile file);
+
+    List<User> findByIdBatch(List<Long> authorIds);
 }

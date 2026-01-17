@@ -1,7 +1,6 @@
-package com.pomdetom.notes.user;
+package com.pomdetom.notes.note;
 
 import com.pomdetom.notes.common.annotation.EnableNeedLoginAspect;
-import com.pomdetom.notes.common.annotation.EnableNotesPassword;
 import com.pomdetom.notes.common.annotation.EnableNotesWeb;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
@@ -11,10 +10,9 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 @EnableDubbo
 @EnableNeedLoginAspect
-@EnableNotesPassword
 @EnableNotesWeb
-public class NotesUserApplication {
+public class NoteApplication {
     public static void main(String[] args) {
-        SpringApplication.run(NotesUserApplication.class, args);
+        SpringApplication.run(NoteApplication.class, args);
     }
 }

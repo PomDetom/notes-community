@@ -24,11 +24,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -38,13 +38,13 @@ import java.util.stream.Collectors;
 @DubboService
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
+    @Resource
     private JwtUtil jwtUtil;
 
     @DubboReference
@@ -247,5 +247,10 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return ApiResponseUtil.error(e.getMessage());
         }
+    }
+
+    @Override
+    public List<User> findByIdBatch(List<Long> authorIds) {
+        return userMapper.findByIdBatch(authorIds);
     }
 }
