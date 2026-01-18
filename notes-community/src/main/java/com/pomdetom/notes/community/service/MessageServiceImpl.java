@@ -45,6 +45,9 @@ public class MessageServiceImpl implements MessageService {
     @DubboReference
     private UserService userService;
 
+    @Resource
+    private KafkaProducerService kafkaProducerService;
+
     @Override
     public Integer createMessage(MessageDTO messageDTO) {
         try {
@@ -55,7 +58,12 @@ public class MessageServiceImpl implements MessageService {
                 message.setContent("");
             }
 
-            return messageMapper.insert(message);
+            int result = messageMapper.insert(message);
+
+            // 发送消息事件到 Kafka
+            kafkaProducerService.sendMessageEvent(message);
+
+            return result;
         } catch (Exception e) {
             throw new RuntimeException("创建消息通知失败: " + e.getMessage());
         }
