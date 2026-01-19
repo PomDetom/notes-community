@@ -1,5 +1,6 @@
 package com.pomdetom.notes.note.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pomdetom.notes.api.note.CategoryService;
 import com.pomdetom.notes.api.note.CollectionNoteService;
 import com.pomdetom.notes.api.note.NoteLikeService;
@@ -27,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -38,6 +40,12 @@ public class NoteServiceImpl implements NoteService {
 
     @Resource
     private NoteMapper noteMapper;
+
+    @Resource
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+    @Resource
+    private ObjectMapper objectMapper;
 
     @DubboReference
     private UserService userService;
@@ -87,7 +95,7 @@ public class NoteServiceImpl implements NoteService {
             Long currentUserId = UserContext.getUserId();
             userLikedNoteIds = noteLikeService.findUserLikedNoteIds(currentUserId, noteIds);
             userCollectedNoteIds = collectionNoteService.findUserCollectedNoteIds(currentUserId, noteIds);
-        } else {  // 未登录状态直接设置为空集合
+        } else { // 未登录状态直接设置为空集合
             userLikedNoteIds = Collections.emptySet();
             userCollectedNoteIds = Collections.emptySet();
         }
@@ -153,7 +161,7 @@ public class NoteServiceImpl implements NoteService {
         // 判断问题指定的问题是否存在
         Question question = questionService.findById(questionId);
 
-        if (question == null) {  // 对应的问题不存在
+        if (question == null) { // 对应的问题不存在
             return ApiResponseUtil.error("questionId 对应的问题不存在");
         }
 
@@ -163,6 +171,10 @@ public class NoteServiceImpl implements NoteService {
 
         try {
             noteMapper.insert(note);
+
+            // 发送 ES 同步消息
+            kafkaTemplate.send("note-sync-es", objectMapper.writeValueAsString(note));
+
             CreateNoteVO createNoteVO = new CreateNoteVO();
             createNoteVO.setNoteId(note.getNoteId());
             return ApiResponseUtil.success("创建笔记成功", createNoteVO);
@@ -190,6 +202,10 @@ public class NoteServiceImpl implements NoteService {
         try {
             note.setContent(request.getContent());
             noteMapper.update(note);
+
+            // 发送 ES 同步消息
+            kafkaTemplate.send("note-sync-es", objectMapper.writeValueAsString(note));
+
             return ApiResponseUtil.success("更新笔记成功");
         } catch (Exception e) {
             return ApiResponseUtil.error("更新笔记失败");
@@ -215,6 +231,10 @@ public class NoteServiceImpl implements NoteService {
 
         try {
             noteMapper.deleteById(noteId);
+
+            // 发送 ES 删除消息
+            kafkaTemplate.send("note-delete-es", String.valueOf(noteId));
+
             return ApiResponseUtil.success("删除笔记成功");
         } catch (Exception e) {
             return ApiResponseUtil.error("删除笔记失败");
@@ -276,12 +296,12 @@ public class NoteServiceImpl implements NoteService {
 
                 for (Question question : categoryQuestionList) {
 
-                    if (!hasTopLevelToc) {  // 设置一级标题
+                    if (!hasTopLevelToc) { // 设置一级标题
                         markdownContent.append("# ").append(categoryVO.getName()).append("\n");
                         hasTopLevelToc = true;
                     }
 
-                    if (!hasSubLevelToc) {  // 设置二级标题
+                    if (!hasSubLevelToc) { // 设置二级标题
                         markdownContent.append("## ").append(childrenCategoryVO.getName()).append("\n");
                         hasSubLevelToc = true;
                     }

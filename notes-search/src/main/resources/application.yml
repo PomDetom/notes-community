@@ -1,0 +1,15 @@
+server:
+  port: 8007
+
+spring:
+  application:
+    name: notes-search
+  elasticsearch:
+    uris: http://localhost:9200
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    consumer:
+      group-id: notes-search-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer

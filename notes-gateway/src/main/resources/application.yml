@@ -48,7 +48,10 @@ spring:
           predicates:
             - Path=/api/questions/**, /api/admin/questions/**, /api/admin/questionlists/**, /api/questionlist-items/**, /api/admin/questionlist-items/**
         # 搜索模块
-
+        - id: notes-search
+          uri: lb://notes-search
+          predicates:
+            - Path=/api/search/**
         # 测试模块
         - id: notes-test-provider
           uri: lb://notes-test-provider

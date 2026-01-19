@@ -39,3 +39,11 @@ dubbo:
   application:
     serialize-check-status: WARN
     serialize-allow-list: com.pomdetom.notes.common.model.**
+
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    producer:
+      retries: 3
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
